@@ -236,8 +236,8 @@ def main():
     parser.add_argument("--page", type=int, default=0, help="Page number (default: 0)")
     parser.add_argument("--format", choices=["markdown", "json"], default="markdown",
                         help="Output format (default: markdown)")
-    parser.add_argument("--readme", action="store_true",
-                        help="Include model card summary for each model (slower)")
+    parser.add_argument("--no-readme", action="store_true",
+                        help="Skip model card summary (faster, default includes readme)")
     parser.add_argument("--limit", type=int, default=0,
                         help="Limit number of models to fetch (0 = all)")
     args = parser.parse_args()
@@ -248,7 +248,9 @@ def main():
     if args.limit > 0:
         models = models[:args.limit]
 
-    output = format_output(models, args.format, args.readme)
+    # Default: include readme, use --no-readme to skip
+    include_readme = not args.no_readme
+    output = format_output(models, args.format, include_readme)
     print(output)
 
 

@@ -18,20 +18,20 @@ python3 scripts/scrape_hf_trending.py [options]
 **Options:**
 - `--task <task>` - Filter by task (e.g., `text-generation`, `image-classification`)
 - `--page <n>` - Page number (default: 0)
-- `--readme` - Include model card summary for each model (slower)
+- `--no-readme` - Skip model card summary (faster, default includes readme)
 - `--limit <n>` - Limit number of models to fetch (0 = all)
 - `--format <markdown|json>` - Output format (default: markdown)
 
 ## Examples
 
-**Get trending models:**
+**Get trending models with descriptions (default):**
 ```bash
 python3 scripts/scrape_hf_trending.py
 ```
 
-**Get top 10 models with model card details:**
+**Get top 10 models quickly (no descriptions):**
 ```bash
-python3 scripts/scrape_hf_trending.py --readme --limit 10
+python3 scripts/scrape_hf_trending.py --no-readme --limit 10
 ```
 
 **Get JSON output for processing:**
@@ -50,3 +50,4 @@ Each model includes:
 - `downloads` - Download count
 - `likes` - Like count
 - `updated` - Last update time
+- `model_card` - Model card summary with description (included by default)
